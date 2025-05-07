@@ -1,6 +1,11 @@
 package com.github.youssfbr.clientes.api.clientes;
 
+import com.github.youssfbr.clientes.api.telefones.Telefone;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "clientes")
@@ -11,6 +16,9 @@ public class Cliente {
     private Long id;
 
     private String nome;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Telefone> telefones = new ArrayList<>();
 
     public Cliente(String nome , Long id) {
         this.nome = nome;
@@ -31,5 +39,26 @@ public class Cliente {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public List<Telefone> getTelefones() {
+        return telefones;
+    }
+
+    public void setTelefones(List<Telefone> telefones) {
+        this.telefones = telefones;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cliente cliente = (Cliente) o;
+        return Objects.equals(id , cliente.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

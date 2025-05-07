@@ -1,4 +1,4 @@
-package com.github.youssfbr.clientes.clientes;
+package com.github.youssfbr.clientes.api.clientes;
 
 import jakarta.persistence.*;
 

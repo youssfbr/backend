@@ -26,6 +26,11 @@ public class Telefone {
         this.cliente = cliente;
     }
 
+    public Telefone(String numero , Cliente cliente) {
+        this.numero = numero;
+        this.cliente = cliente;
+    }
+
     public Long getId() {
         return id;
     }

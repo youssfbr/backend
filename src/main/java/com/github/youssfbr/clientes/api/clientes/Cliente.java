@@ -1,5 +1,6 @@
 package com.github.youssfbr.clientes.api.clientes;
 
+import com.github.youssfbr.clientes.api.telefones.DadosCadastroTelefone;
 import com.github.youssfbr.clientes.api.telefones.Telefone;
 import jakarta.persistence.*;
 
@@ -23,6 +24,14 @@ public class Cliente {
     public Cliente(String nome , Long id) {
         this.nome = nome;
         this.id = id;
+    }
+
+    public Cliente(DadosCadastroCliente dados) {
+        nome = dados.nome();
+        for (DadosCadastroTelefone dadosCadastroTelefone : dados.telefones()) {
+            Telefone telefone = new Telefone(dadosCadastroTelefone.numero(), this);
+            telefones.add(telefone);
+        }
     }
 
     public Long getId() {

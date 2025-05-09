@@ -1,6 +1,7 @@
 package com.github.youssfbr.clientes.api.controllers;
 
 import com.github.youssfbr.clientes.api.domains.customers.CreateCustomerDTO;
+import com.github.youssfbr.clientes.api.domains.customers.ICustomerService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("customers")
 public class CustomerController {
 
+    private final ICustomerService customerService;
+
+    public CustomerController(ICustomerService customerService) {
+        this.customerService = customerService;
+    }
+
     @PostMapping
     public void create(@RequestBody CreateCustomerDTO dto) {
-        System.out.println(dto);
+        customerService.createCustomer(dto);
     }
 }

@@ -30,6 +30,18 @@ public class Address {
         this.region = region;
     }
 
+    public Address(CreateAddressDTO address) {
+        this.cep = address.cep();
+        this.publicPlace = address.publicPlace();
+        this.houseNumber = address.houseNumber();
+        this.supplement = address.supplement();
+        this.neighborhood = address.neighborhood();
+        this.city = address.city();
+        this.uf = address.uf();
+        this.state = address.state();
+        this.region = address.region();
+    }
+
     public String getCep() {
         return cep;
     }

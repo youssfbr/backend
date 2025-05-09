@@ -2,13 +2,12 @@ package com.github.youssfbr.clientes.api.domains.customers;
 
 import com.github.youssfbr.clientes.api.domains.addresses.Address;
 import com.github.youssfbr.clientes.api.domains.phones.Phone;
+
 import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "tb_customers")
@@ -40,7 +39,7 @@ public class Customer {
 
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Phone> phones = new HashSet<>();
+    private List<Phone> phones = new ArrayList<>();
 
     @Embedded
     private Address address;
@@ -54,7 +53,7 @@ public class Customer {
     public Customer() {}
 
     public Customer(Long id, String fullName, String firstName, String lastName, String email, String cpf,
-                    LocalDate birthDate, String note, Set<Phone> phones, Address address) {
+                    LocalDate birthDate, String note, List<Phone> phones, Address address) {
         this.id = id;
         this.fullName = fullName;
         this.firstName = firstName;
@@ -66,6 +65,25 @@ public class Customer {
         this.phones = phones;
         this.address = address;
     }
+
+    public Customer(CreateCustomerDTO dto) {
+        this.fullName = dto.fullName();
+        this.firstName = dto.firstName();
+        this.lastName = dto.lastName();
+        this.email = dto.email();
+        this.cpf = dto.cpf();
+        this.birthDate = dto.birthDate() != null ? LocalDate.parse(dto.birthDate()) : null;
+        this.note = dto.note();
+
+        dto.phones().forEach(phoneDTO -> {
+            final Phone phone = new Phone(phoneDTO, this);
+            phones.add(phone);
+        });
+
+        this.address = new Address(dto.address());
+    }
+
+
 
     public Long getId() {
         return id;
@@ -99,7 +117,7 @@ public class Customer {
         return note;
     }
 
-    public Set<Phone> getPhones() {
+    public List<Phone> getPhones() {
         return phones;
     }
 

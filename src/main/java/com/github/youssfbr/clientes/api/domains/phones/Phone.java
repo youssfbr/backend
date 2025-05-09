@@ -32,6 +32,12 @@ public class Phone {
         this.customer = customer;
     }
 
+    public Phone(CreatePhoneDTO phoneDTO , Customer customer) {
+        this.type = phoneDTO.type();
+        this.number = phoneDTO.number();
+        this.customer = customer;
+    }
+
     public Long getId() {
         return id;
     }

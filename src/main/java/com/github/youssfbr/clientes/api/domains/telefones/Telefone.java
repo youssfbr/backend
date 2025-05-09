@@ -1,6 +1,6 @@
-package com.github.youssfbr.clientes.api.telefones;
+package com.github.youssfbr.clientes.api.domains.telefones;
 
-import com.github.youssfbr.clientes.api.clientes.Cliente;
+import com.github.youssfbr.clientes.api.domains.clientes.Cliente;
 import jakarta.persistence.*;
 
 import java.util.Objects;

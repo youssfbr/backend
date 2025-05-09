@@ -1,7 +1,7 @@
-package com.github.youssfbr.clientes.api.clientes;
+package com.github.youssfbr.clientes.api.domains.clientes;
 
-import com.github.youssfbr.clientes.api.telefones.DadosCadastroTelefone;
-import com.github.youssfbr.clientes.api.telefones.Telefone;
+import com.github.youssfbr.clientes.api.domains.telefones.DadosCadastroTelefone;
+import com.github.youssfbr.clientes.api.domains.telefones.Telefone;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;

@@ -1,7 +1,14 @@
 package com.github.youssfbr.clientes.api.domains.customers;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Positive;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class CustomerService implements ICustomerService {
@@ -10,6 +17,19 @@ public class CustomerService implements ICustomerService {
 
     public CustomerService(ICustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public CustomerPageDTO list(@Positive int page , @Positive @Max(10) int size , String direction , String orderBy) {
+
+        final Page<Customer> pageResult = customerRepository
+                .findAllPageByActiveTrue(PageRequest.of(page , size , Sort.Direction.valueOf(direction) , orderBy));
+
+        final List<ListCustomerDTO> customers = pageResult.get().map(ListCustomerDTO::new).toList();
+
+        return new CustomerPageDTO(customers , pageResult.getTotalElements() , pageResult.getTotalPages());
     }
 
     @Override

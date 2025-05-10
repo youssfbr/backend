@@ -1,18 +1,36 @@
 package com.github.youssfbr.clientes.api.domains.addresses;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Address {
 
+    @Column(length = 11)
     private String cep;
+
+    @Column(length = 100)
     private String publicPlace;
+
+    @Column(length = 20)
     private String houseNumber;
+
+    @Column(length = 40)
     private String supplement;
+
+    @Column(length = 30)
     private String neighborhood;
+
+    @Column(length = 20)
     private String city;
+
+    @Column(length = 2)
     private String uf;
+
+    @Column(length = 20)
     private String state;
+
+    @Column(length = 20)
     private String region;
 
     public Address() {}

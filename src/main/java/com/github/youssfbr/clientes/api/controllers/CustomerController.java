@@ -2,6 +2,7 @@ package com.github.youssfbr.clientes.api.controllers;
 
 import com.github.youssfbr.clientes.api.domains.customers.CreateCustomerDTO;
 import com.github.youssfbr.clientes.api.domains.customers.ICustomerService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public void create(@RequestBody CreateCustomerDTO dto) {
+    public void create(@Valid @RequestBody CreateCustomerDTO dto) {
         customerService.createCustomer(dto);
     }
 }

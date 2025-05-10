@@ -10,7 +10,7 @@ CREATE TABLE tb_customers (
 
     cep VARCHAR(11),
     public_place VARCHAR(100),
-    house_number VARCHAR(10),
+    house_number VARCHAR(20),
     supplement VARCHAR(40),
     neighborhood VARCHAR(30),
     city VARCHAR(20),

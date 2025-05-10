@@ -7,5 +7,6 @@ import jakarta.validation.constraints.PositiveOrZero;
 public interface ICustomerService {
 
     CustomerPageDTO list(@PositiveOrZero int page , @Positive @Max(100) int size , String direction , String orderBy);
+    CustomerDetailDTO detail(Long id);
     void createCustomer(CreateCustomerDTO dto);
 }

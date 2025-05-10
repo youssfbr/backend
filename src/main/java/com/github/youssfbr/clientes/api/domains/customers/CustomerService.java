@@ -1,6 +1,8 @@
 package com.github.youssfbr.clientes.api.domains.customers;
 
+import com.github.youssfbr.clientes.api.infra.exceptions.ResourceNotFoundException;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,9 +35,20 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public CustomerDetailDTO detail(@Positive @NotNull Long id) {
+        return new CustomerDetailDTO(getReferenceById(id));
+    }
+
+    @Override
     @Transactional
     public void createCustomer(CreateCustomerDTO dto) {
         customerRepository.save(new Customer(dto));
+    }
+
+    private Customer getReferenceById(Long id) {
+        return  customerRepository.getReferenceByIdAndActiveTrue(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Resource with ID " + id + " Not found"));
     }
 
 }

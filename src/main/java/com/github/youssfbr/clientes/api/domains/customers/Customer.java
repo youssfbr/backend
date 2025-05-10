@@ -70,8 +70,8 @@ public class Customer {
         this.fullName = dto.fullName();
         this.firstName = dto.firstName();
         this.lastName = dto.lastName();
-        this.email = dto.email();
-        this.cpf = dto.cpf();
+        this.email = (!Objects.equals(dto.email() , "")) ? dto.email() : null;
+        this.cpf = (!Objects.equals(dto.cpf() , "")) ? dto.cpf() : null;
         this.birthDate = dto.birthDate() != null ? LocalDate.parse(dto.birthDate()) : null;
         this.note = dto.note();
 
